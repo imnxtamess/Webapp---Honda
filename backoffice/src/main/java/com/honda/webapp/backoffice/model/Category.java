@@ -25,6 +25,9 @@ public class Category {
   @Column(nullable = false, unique = true)
   private String name;
 
+  @Size(min = 3, max = 255, message = "The url needs to be between 3 and 255 characters long")
+  private String imagePath;
+
   @ManyToMany(mappedBy = "categories")
   private List<Moto> motos;
 
@@ -42,6 +45,14 @@ public class Category {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getImagePath() {
+    return this.imagePath;
+  }
+
+  public void setImagePath(String imagePath) {
+    this.imagePath = imagePath;
   }
 
   public List<Moto> getMotos() {

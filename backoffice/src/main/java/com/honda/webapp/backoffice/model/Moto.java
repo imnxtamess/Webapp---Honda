@@ -39,6 +39,10 @@ public class Moto {
   @Size(min = 3, max = 255, message = "The url needs to be between 3 and 255 characters long")
   private String imagePath;
 
+  @OneToMany
+  @JoinColumn(name = "moto_id", referencedColumnName = "id")
+  private List<ColorVariant> colorVariants;
+
   @ManyToOne
   @JsonIgnore
   @JoinColumn(name = "engine_id", nullable = false)

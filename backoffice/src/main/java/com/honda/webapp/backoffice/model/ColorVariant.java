@@ -25,8 +25,8 @@ public class ColorVariant {
   @Size(max = 7, message = "Hex code must be max 7 characters long")
   private String hexCode;
 
-  @Size(max = 255)
-  private String imageUrl;
+  @Size(min = 3, max = 255, message = "The url needs to be between 3 and 255 characters long")
+  private String imagePath;
 
   @ManyToOne
   @JoinColumn(name = "variant_id", nullable = false)
@@ -56,12 +56,12 @@ public class ColorVariant {
     this.hexCode = hexCode;
   }
 
-  public String getImageUrl() {
-    return this.imageUrl;
+  public String getImagePath() {
+    return this.imagePath;
   }
 
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
+  public void setImageUrl(String imagePath) {
+    this.imagePath = imagePath;
   }
 
   public Variant getVariant() {
