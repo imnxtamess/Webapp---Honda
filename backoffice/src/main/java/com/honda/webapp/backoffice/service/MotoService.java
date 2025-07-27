@@ -41,9 +41,9 @@ public class MotoService {
     motoRepository.delete(moto);
   }
 
-  public List<Moto> findByCategoryId(Integer id) {
+  public List<Moto> findByCategories_Id(Integer id) {
 
-    return motoRepository.findByCategoryId(id);
+    return motoRepository.findByCategories_Id(id);
   }
 
 }

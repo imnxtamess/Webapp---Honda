@@ -48,6 +48,7 @@ public class Moto {
   private List<Variant> variants;
 
   @ManyToMany()
+  @JsonIgnore
   @JoinTable(name = "category_moto", joinColumns = @JoinColumn(name = "moto_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
   private List<Category> categories;
 

@@ -43,15 +43,4 @@ public class MotoRestController {
     return new ResponseEntity<Moto>(motoAttempt.get(), HttpStatus.OK);
   }
 
-  @GetMapping("/category/{id}")
-  public ResponseEntity<List<Moto>> filterByCategory(@Valid @PathVariable Integer id) {
-
-    List<Moto> filteredMotos = motoService.findByCategoryId(id);
-    if (filteredMotos.isEmpty()) {
-      return new ResponseEntity<List<Moto>>(HttpStatus.NOT_FOUND);
-    }
-
-    return new ResponseEntity<List<Moto>>(filteredMotos, HttpStatus.OK);
-  }
-
 }

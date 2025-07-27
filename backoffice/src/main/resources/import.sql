@@ -1,0 +1,12 @@
+-- Insert into categories
+INSERT INTO categories (id, name, image_path) VALUES (1, 'Sport', 'images/categories/sport.jpg'),(2, 'Adventure', 'images/categories/adventure.jpg');
+
+INSERT INTO engines (id, fuel_system, engine_displacement, max_power, max_torque, compression_ratio, engine_type) VALUES (1, 'Fuel Injection', 1000, 150, 110, 12.5, 'Inline-4'),(2, 'Carburetor', 750, 90, 70, 11.0, 'V-Twin');
+
+INSERT INTO motos (id, name, description, image_path, engine_id) VALUES (1, 'Honda CBR1000RR', 'A high-performance sport bike.', 'images/motos/cbr1000rr.jpg', 1), (2, 'Honda Africa Twin', 'Adventure bike for off-road and touring.', 'images/motos/africa_twin.jpg', 2);
+
+INSERT INTO category_moto (category_id, moto_id) VALUES (1, 1), (2, 2);
+
+INSERT INTO variants (id, name, cruise_control, manual_transmission, price, moto_id, seat_height, weight, frame_type, front_suspension, quick_shifter, head_lights, tank_capacity, rear_suspension) VALUES (1, 'CBR1000RR Standard', TRUE, TRUE, 16000, 1, 820, 197, 'Aluminum', 'Inverted Telescopic', TRUE, 'LED', 17, 'Mono-shock'), (2, 'Africa Twin Standard', FALSE, TRUE, 14000, 2, 850, 226, 'Steel', 'Telescopic', FALSE, 'Halogen', 18.8, 'Mono-shock');
+
+INSERT INTO color_variants (id, variant_id, image_path, hex_code, name) VALUES (1, 1, 'images/colors/red_cbr.jpg', '#FF0000', 'Red'), (2, 1, 'images/colors/black_cbr.jpg', '#000000', 'Black'), (3, 2, 'images/colors/white_africa.jpg', '#FFFFFF', 'Pearl White'), (4, 2, 'images/colors/blue_africa.jpg', '#0000FF', 'Blue');
