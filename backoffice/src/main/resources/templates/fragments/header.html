@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:fragment="style">
+      <link
+        th:rel="stylesheet"
+        th:href="@{/webjars/bootstrap/5.3.6/css/bootstrap.min.css}"
+      />
+      <link rel="stylesheet" th:href="@{/css/style.css}" />
+      <title>Honda Motorcycles</title>
+    </th:block>
+  </head>
+  <body>
+    <th:block th:fragment="header">
+      <header>
+        <nav class="navbar p-3 navbar-expand-sm navbar-dark bg-dark">
+          <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand" href="#">🍕 Crud Pizzeria</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarID"
+              aria-controls="navbarID"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarID">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" th:href="@{/}"
+                  >Home</a
+                >
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  th:href="@{/engines}"
+                  >Engines</a
+                >
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  th:href="@{/categories}"
+                  >Categories</a
+                >
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  th:href="@{/motos}"
+                  >Motos</a
+                >
+              </div>
+              <div class="text-white d-flex align-items-center gap-3 ms-auto">
+                <span
+                  >Logged user:
+                  <span sec:authentication="name" class="fw-bold"></span
+                ></span>
+
+                <span>
+                  Roles:
+                  <span
+                    sec:authentication="principal.authorities"
+                    class="fw-bold"
+                  ></span>
+                </span>
+                <a class="btn btn-sm btn-danger" href="/logout">Sign out</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </th:block>
+    <th:block th:fragment="bootstrapJs">
+      <script
+        th:src="@{/webjars/bootstrap/5.3.6/js/bootstrap.bundle.min.js}"
+      ></script>
+    </th:block>
+  </body>
+</html>

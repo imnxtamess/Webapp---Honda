@@ -1,0 +1,105 @@
+body {
+  background-color: #e60515;
+  overflow-x: hidden;
+}
+
+.honda-logo {
+  background-image: url(/images/honda-logo-red.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 50vh;
+  height: 50vh;
+  border: 3px solid white;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title-1,
+.title-2,
+.title-3 {
+  position: absolute;
+  font-family: "Orbitron", sans-serif;
+  color: white;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0;
+  animation-delay: 0.3s;
+  @media (min-width: 1200px) {
+    font-size: 5rem;
+  }
+}
+
+.title-1 {
+  top: calc(50% - 35vh);
+  left: 50%;
+  transform: translateX(-50%);
+  animation: fadeInFromTop 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.title-2 {
+  top: calc(50% + 30vh);
+  left: calc(50% - 30vh);
+  transform: translate(-50%, -50%);
+  animation: fadeInFromBottomLeft 1s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.title-3 {
+  top: calc(50% + 30vh);
+  left: calc(50% + 30vh);
+  transform: translate(-50%, -50%);
+  animation: fadeInFromBottomRight 1s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.title-1:hover,
+.title-2:hover,
+.title-3:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.title-1:hover,
+.title-2:hover,
+.title-3:hover {
+  letter-spacing: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeInFromBottomLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-60%, 10vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes fadeInFromBottomRight {
+  0% {
+    opacity: 0;
+    transform: translate(-40%, 10vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <div class="wrapper">
+        <div class="honda-logo">
+          <div class="title-1">Engines</div>
+          <div class="title-2">Categories</div>
+          <div class="title-3">Motorcycles</div>
+        </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>
