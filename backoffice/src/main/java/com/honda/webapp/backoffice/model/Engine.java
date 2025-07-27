@@ -2,6 +2,7 @@ package com.honda.webapp.backoffice.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class Engine {
   @Column(nullable = false)
   private String compressionRatio;
 
-  @OneToMany(mappedBy = "engine")
+  @OneToMany(mappedBy = "engine", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Moto> motos;
 
   public Integer getId() {

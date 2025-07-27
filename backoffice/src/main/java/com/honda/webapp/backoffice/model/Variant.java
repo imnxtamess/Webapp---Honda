@@ -73,7 +73,7 @@ public class Variant {
   private Moto moto;
 
   @OneToMany(mappedBy = "variant", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
-  private List<ColorVariant> specialColorVariants;
+  private List<ColorVariant> colorVariants;
 
   public Integer getId() {
     return this.id;
@@ -187,12 +187,12 @@ public class Variant {
     this.moto = moto;
   }
 
-  public List<ColorVariant> getSpecialColorVariants() {
-    return this.specialColorVariants;
+  public List<ColorVariant> getColorVariants() {
+    return this.colorVariants;
   }
 
-  public void setSpecialColorVariants(List<ColorVariant> specialColorVariants) {
-    this.specialColorVariants = specialColorVariants;
+  public void setSpecialColorVariants(List<ColorVariant> colorVariants) {
+    this.colorVariants = colorVariants;
   }
 
 }

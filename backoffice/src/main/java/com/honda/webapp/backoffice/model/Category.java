@@ -62,4 +62,5 @@ public class Category {
   public void setMotos(List<Moto> motos) {
     this.motos = motos;
   }
+
 }

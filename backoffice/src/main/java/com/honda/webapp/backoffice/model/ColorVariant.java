@@ -1,5 +1,7 @@
 package com.honda.webapp.backoffice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class ColorVariant {
   private String imagePath;
 
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "variant_id", nullable = false)
   private Variant variant;
 
@@ -60,7 +63,7 @@ public class ColorVariant {
     return this.imagePath;
   }
 
-  public void setImageUrl(String imagePath) {
+  public void setImagePath(String imagePath) {
     this.imagePath = imagePath;
   }
 
