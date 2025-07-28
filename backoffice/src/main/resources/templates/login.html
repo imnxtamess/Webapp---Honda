@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <div class="honda-logo">
+        <div class="login-form">
+          <form method="post" th:action="@{/login}">
+            <input
+              class="mb-3"
+              type="text"
+              name="username"
+              placeholder="Username"
+            />
+            <input
+              class="mb-3"
+              type="text"
+              name="password"
+              placeholder="Password"
+            />
+            <button class="mb-3" type="submit">Login</button>
+          </form>
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger error-msg">
+          Invalid username or password.
+        </div>
+
+        <div th:if="${param.logout}" class="alert alert-success error-msg">
+          You have been logged out.
+        </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

@@ -3,6 +3,43 @@ body {
   overflow-x: hidden;
 }
 
+.login-form {
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: -20%;
+    transform: translate(-50%, -50%);
+    input {
+      background-color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 15px;
+      border: 3px solid #e60515;
+      &:focus {
+        outline: none;
+        border: 3px solid black;
+      }
+    }
+    button {
+      padding: 0.5rem 2rem;
+      border: none;
+      outline: none;
+      background-color: black;
+      color: white;
+      border-radius: 15px;
+    }
+  }
+}
+
+.error-msg {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -50%);
+}
+
 .honda-logo {
   background-image: url(/images/honda-logo-red.jpg);
   background-size: cover;
