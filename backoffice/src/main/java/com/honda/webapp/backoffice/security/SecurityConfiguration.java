@@ -34,8 +34,8 @@ public class SecurityConfiguration {
 
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-    // authProvider.setUserDetailsService(userDetailService());
-    authProvider.setUserDetailsService(inMemoryUserDetailService());
+    authProvider.setUserDetailsService(userDetailService());
+    // authProvider.setUserDetailsService(inMemoryUserDetailService());
 
     authProvider.setPasswordEncoder(passwordEncoder());
 
@@ -54,12 +54,12 @@ public class SecurityConfiguration {
   }
 
   // ; Da commentare per login con db
-  @Bean
-  UserDetailsService inMemoryUserDetailService() {
-    return new InMemoryUserDetailsManager(
-        User.withUsername("admin")
-            .password(passwordEncoder().encode("admin123"))
-            .authorities("ADMIN")
-            .build());
-  }
+  // @Bean
+  // UserDetailsService inMemoryUserDetailService() {
+  // return new InMemoryUserDetailsManager(
+  // User.withUsername("admin")
+  // .password(passwordEncoder().encode("admin123"))
+  // .authorities("ADMIN")
+  // .build());
+  // }
 }

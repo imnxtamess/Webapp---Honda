@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <h1 class="heading mt-5 text-center">Engines</h1>
+      <div class="container">
+        <div class="bg-light rounded mt-5 p-5">
+
+        <form id="category-form" th:object="${category}"
+        th:action="${edit} ? @{|/categories/edit/${category.id}|} : @{/categories/create}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+
+        <div class="mb-3">
+          <label for="name" class="form-label fw-bold text-uppercase">Category name</label>
+          <input type="text" class="form-control" id="name" th:field="*{name}"
+            th:errorClass="is-invalid" placeholder="Write the category name here..."></input>
+          <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('name')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="imagePath" class="form-label fw-bold text-uppercase">Image path</label>
+          <input type="text" class="form-control" id="imagePath" th:field="*{imagePath}"
+            th:errorClass="is-invalid" placeholder="Write the image path here..."></input>
+          <div th:if="${#fields.hasErrors('imagePath')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('imagePath')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <input type="submit" class="btn btn-large btn-honda fw-bold text-uppercase" />
+
+      </form>
+
+
+
+        </div>
+      </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

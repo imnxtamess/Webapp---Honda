@@ -113,4 +113,8 @@ public class Engine {
     this.motos = motos;
   }
 
+  @Override
+  public String toString() {
+    return engineDisplacement + "cc " + engineType;
+  }
 }

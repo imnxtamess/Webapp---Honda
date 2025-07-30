@@ -195,4 +195,9 @@ public class Variant {
     this.colorVariants = colorVariants;
   }
 
+  @Override
+  public String toString() {
+    return getName();
+  }
+
 }

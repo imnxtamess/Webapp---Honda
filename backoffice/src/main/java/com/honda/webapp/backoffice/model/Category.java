@@ -63,4 +63,8 @@ public class Category {
     this.motos = motos;
   }
 
+  @Override
+  public String toString() {
+    return getName();
+  }
 }

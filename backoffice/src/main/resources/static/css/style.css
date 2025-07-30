@@ -3,6 +3,56 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn-honda {
+  background-color: #e60515;
+  color: white;
+  &:hover {
+    scale: 1.1;
+    background-color: #e60515;
+    color: white !important;
+    transition: ease-in 0.2s;
+  }
+}
+
+.deleteModal {
+  background-color: #e60515;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 50vh;
+  border-radius: 15px;
+  button {
+    font-weight: bold;
+    padding: 1rem;
+    text-transform: uppercase;
+  }
+  .yes {
+    background-color: white;
+    color: red;
+  }
+}
+
+.create {
+  background-color: #e60515;
+  display: inline-block;
+  color: white;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  &:hover {
+    scale: 1.1;
+    transition: ease-in 0.2s;
+  }
+}
+
 .login-form {
   form {
     display: flex;
@@ -18,7 +68,7 @@ body {
     }
     input {
       background-color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.5rem;
       border-radius: 15px;
       border: 3px solid #e60515;
       &:focus {
@@ -58,7 +108,6 @@ body {
   border: 3px solid white;
   border-radius: 50%;
   position: absolute;
-  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
@@ -68,6 +117,18 @@ body {
   @media (max-width: 800px) {
     left: 50%;
   }
+}
+
+.honda-logo.center {
+  left: 30%;
+  animation: moveToCenter 0.5s forwards ease;
+}
+
+.heading {
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  font-size: 3rem;
+  color: white;
 }
 
 .title-1,
@@ -91,7 +152,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   animation: fadeInFromTop 1s ease-out forwards;
-  animation-delay: 0.2s;
+  animation-delay: 0.6s;
 }
 
 .title-2 {
@@ -99,7 +160,7 @@ body {
   left: calc(50% - 30vh);
   transform: translate(-50%, -50%);
   animation: fadeInFromBottomLeft 1s ease-out forwards;
-  animation-delay: 0.4s;
+  animation-delay: 0.8s;
 }
 
 .title-3 {
@@ -107,7 +168,7 @@ body {
   left: calc(50% + 30vh);
   transform: translate(-50%, -50%);
   animation: fadeInFromBottomRight 1s ease-out forwards;
-  animation-delay: 0.6s;
+  animation-delay: 1s;
 }
 
 .title-1:hover,
@@ -122,6 +183,12 @@ body {
 .title-3:hover {
   letter-spacing: 0.5rem;
   transition: all 0.3s ease-in-out;
+}
+
+@keyframes moveToCenter {
+  to {
+    left: 50%;
+  }
 }
 
 @keyframes fadeInFromTop {

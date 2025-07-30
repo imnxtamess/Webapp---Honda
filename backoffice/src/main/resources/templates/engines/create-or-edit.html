@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <h1 class="heading mt-5 text-center">Engines</h1>
+      <div class="container">
+        <div class="bg-light rounded mt-5 p-5">
+
+        <form id="engine-form" th:object="${engine}"
+        th:action="${edit} ? @{|/engines/edit/${engine.id}|} : @{/engines/create}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+
+        <div class="mb-3">
+          <label for="engineType" class="form-label fw-bold text-uppercase">Engine Type</label>
+          <input type="text" class="form-control" id="engineType" th:field="*{engineType}"
+            th:errorClass="is-invalid" placeholder="Write the engine type here..."></input>
+          <div th:if="${#fields.hasErrors('engineType')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('engineType')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="engineDisplacement" class="form-label fw-bold text-uppercase">Engine Displacement</label>
+          <input type="text" class="form-control" id="engineDisplacement" th:field="*{engineDisplacement}"
+            th:errorClass="is-invalid" placeholder="Write the engine displacement here..."></input>
+          <div th:if="${#fields.hasErrors('engineDisplacement')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('engineDisplacement')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+        <div class="mb-3">
+          <label for="fuelSystem" class="form-label fw-bold text-uppercase">Fuel System</label>
+          <input type="text" class="form-control" id="fuelSystem" th:field="*{fuelSystem}"
+            th:errorClass="is-invalid" placeholder="Write the engine fuel system here..."></input>
+          <div th:if="${#fields.hasErrors('fuelSystem')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('fuelSystem')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="compressionRatio" class="form-label fw-bold text-uppercase">Compression Ratio</label>
+          <input type="text" class="form-control" id="compressionRatio" th:field="*{compressionRatio}"
+            th:errorClass="is-invalid" placeholder="Write the engine compression ratio here..."></input>
+          <div th:if="${#fields.hasErrors('compressionRatio')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('compressionRatio')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="maxPower" class="form-label fw-bold text-uppercase">Max Hp</label>
+          <input type="text" class="form-control" id="maxPower" th:field="*{maxPower}"
+            th:errorClass="is-invalid" placeholder="Write the engine max horse power here..."></input>
+          <div th:if="${#fields.hasErrors('maxPower')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('maxPower')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="mb-3">
+          <label for="maxTorque" class="form-label fw-bold text-uppercase">Max Torque</label>
+          <input type="text" class="form-control" id="maxTorque" th:field="*{maxTorque}"
+            th:errorClass="is-invalid" placeholder="Write the engine max torque here..."></input>
+          <div th:if="${#fields.hasErrors('maxTorque')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('maxTorque')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+        <input type="submit" class="btn btn-large btn-honda fw-bold text-uppercase" />
+
+      </form>
+
+
+
+        </div>
+      </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>
