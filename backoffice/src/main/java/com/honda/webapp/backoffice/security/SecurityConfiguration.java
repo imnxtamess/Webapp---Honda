@@ -5,8 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -31,7 +34,8 @@ public class SecurityConfiguration {
 
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-    authProvider.setUserDetailsService(userDetailService());
+    // authProvider.setUserDetailsService(userDetailService());
+    authProvider.setUserDetailsService(inMemoryUserDetailService());
 
     authProvider.setPasswordEncoder(passwordEncoder());
 
@@ -47,5 +51,15 @@ public class SecurityConfiguration {
   PasswordEncoder passwordEncoder() {
 
     return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  }
+
+  // ; Da commentare per login con db
+  @Bean
+  UserDetailsService inMemoryUserDetailService() {
+    return new InMemoryUserDetailsManager(
+        User.withUsername("admin")
+            .password(passwordEncoder().encode("admin123"))
+            .authorities("ADMIN")
+            .build());
   }
 }
