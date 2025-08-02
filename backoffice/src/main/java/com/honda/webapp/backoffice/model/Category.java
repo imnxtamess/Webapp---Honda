@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -28,7 +28,7 @@ public class Category {
   @Size(min = 3, max = 255, message = "The url needs to be between 3 and 255 characters long")
   private String imagePath;
 
-  @ManyToMany(mappedBy = "categories")
+  @OneToMany(mappedBy = "category")
   private List<Moto> motos;
 
   public Integer getId() {
@@ -56,7 +56,7 @@ public class Category {
   }
 
   public List<Moto> getMotos() {
-    return motos;
+    return this.motos;
   }
 
   public void setMotos(List<Moto> motos) {

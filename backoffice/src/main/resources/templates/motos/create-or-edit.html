@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <h1 class="heading mt-5 text-center">Motorcycles</h1>
+      <div class="container">
+      <a class="text-white fw-bold fs-3 d-block mt-3" th:href="@{/motos}"><i class="bi bi-arrow-left-short fs-1"></i></a>
+
+        <div class="bg-light rounded mt-5 p-5">
+
+        <form id="moto-form" th:object="${moto}"
+        th:action="${edit} ? @{|/motos/edit/${moto.id}|} : @{/motos/create}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+
+        <div class="mb-3">
+          <label for="name" class="form-label fw-bold text-uppercase">Motorcycle name</label>
+          <input type="text" class="form-control" id="name" th:field="*{name}"
+            th:errorClass="is-invalid" placeholder="Write the motorcycle name here..."></input>
+          <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('name')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+          <div class="mb-3">
+            <label for="engine" class="form-label fw-bold text-uppercase">Engine</label>
+            <select id="engine" th:field="*{engine}" class="form-select">
+              <option th:each="engine : ${engines}"
+                th:value="${engine.id}"
+                th:text="${engine.engineType} + ' ' + ${engine.engineDisplacement} + 'cc'">
+             </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="category" class="form-label fw-bold text-uppercase">Category</label>
+            <select id="category" class="form-select" th:field="*{category}">
+              <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+          </div>
+
+
+
+        <div class="mb-3">
+          <label for="description" class="form-label fw-bold text-uppercase">Motorcycle description</label>
+          <textarea type="text" class="form-control" id="description" th:field="*{description}"
+            th:errorClass="is-invalid" placeholder="Write the motorcycle description here..."></textarea>
+          <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('description')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+        <div class="mb-3">
+          <label for="imagePath" class="form-label fw-bold text-uppercase">Image path</label>
+          <input type="text" class="form-control" id="imagePath" th:field="*{imagePath}"
+            th:errorClass="is-invalid" placeholder="Write the image path here..."></input>
+          <div th:if="${#fields.hasErrors('imagePath')}" class="invalid-feedback">
+            <ul>
+              <li th:each="err: ${#fields.errors('imagePath')}" th:text="${err}"></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+
+        <input type="submit" class="btn btn-large btn-honda fw-bold text-uppercase" />
+
+      </form>
+
+
+
+        </div>
+      </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

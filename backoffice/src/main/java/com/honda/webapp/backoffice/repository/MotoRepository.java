@@ -8,6 +8,6 @@ import com.honda.webapp.backoffice.model.Moto;
 
 public interface MotoRepository extends JpaRepository<Moto, Integer> {
 
-  List<Moto> findByCategories_Id(Integer categoryId);
+  List<Moto> findByCategory_Id(Integer categoryId);
 
 }

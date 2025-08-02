@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <h1 class="heading mt-5 text-center" th:text="'Variants of ' + ${moto.name}"></h1>
+      <div class="container">
+      <a class="text-white fw-bold fs-3 d-block mt-3" th:href="@{/variants/moto/{motoId}(motoId = ${moto.id})}"><i class="bi bi-arrow-left-short fs-1"></i></a>
+
+      <div class="bg-light rounded mt-5 p-5">
+
+        <form th:action="${variant.id != null} ? @{|/variants/moto/${variant.moto.id}/edit/${variant.id}|} : @{|/variants/moto/${variant.moto.id}/create|}" method="post" th:object="${variant}">
+
+
+          <input type="hidden" th:field="*{id}">
+
+
+          <div class="mb-3">
+            <label for="name" class="form-label fw-bold text-uppercase">Variant name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}"
+              th:errorClass="is-invalid" placeholder="Write the variant name here..."></input>
+            <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('name')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label fw-bold text-uppercase">Variant price</label>
+            <input type="text" class="form-control" id="price" th:field="*{price}"
+              th:errorClass="is-invalid" placeholder="Write the variant price here..."></input>
+            <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('price')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="weight" class="form-label fw-bold text-uppercase">Weight</label>
+            <input type="text" class="form-control" id="weight" th:field="*{weight}"
+              th:errorClass="is-invalid" placeholder="Write the variant weight here..."></input>
+            <div th:if="${#fields.hasErrors('weight')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('weight')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="tankCapacity" class="form-label fw-bold text-uppercase">Tank capacity</label>
+            <input type="text" class="form-control" id="tankCapacity" th:field="*{tankCapacity}"
+              th:errorClass="is-invalid" placeholder="Write the variant tank capacity here..."></input>
+            <div th:if="${#fields.hasErrors('tankCapacity')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('tankCapacity')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="seatHeight" class="form-label fw-bold text-uppercase">Seat height</label>
+            <input type="text" class="form-control" id="seatHeight" th:field="*{seatHeight}"
+              th:errorClass="is-invalid" placeholder="Write the variant seat height here..."></input>
+            <div th:if="${#fields.hasErrors('seatHeight')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('seatHeight')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+           <div class="mb-3">
+            <label for="frontSuspension" class="form-label fw-bold text-uppercase">Front suspension</label>
+            <input type="text" class="form-control" id="frontSuspension" th:field="*{frontSuspension}"
+              th:errorClass="is-invalid" placeholder="Write the variant front suspension here..."></input>
+            <div th:if="${#fields.hasErrors('frontSuspension')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('frontSuspension')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="rearSuspension" class="form-label fw-bold text-uppercase">Rear suspension</label>
+            <input type="text" class="form-control" id="rearSuspension" th:field="*{rearSuspension}"
+              th:errorClass="is-invalid" placeholder="Write the variant rear suspension here..."></input>
+            <div th:if="${#fields.hasErrors('rearSuspension')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('rearSuspension')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="headLights" class="form-label fw-bold text-uppercase">Head lights</label>
+            <input type="text" class="form-control" id="headLights" th:field="*{headLights}"
+              th:errorClass="is-invalid" placeholder="Write the variant head lights here..."></input>
+            <div th:if="${#fields.hasErrors('headLights')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('headLights')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="frameType" class="form-label fw-bold text-uppercase">Frame type</label>
+            <input type="text" class="form-control" id="frameType" th:field="*{frameType}"
+              th:errorClass="is-invalid" placeholder="Write the variant frame type here..."></input>
+            <div th:if="${#fields.hasErrors('frameType')}" class="invalid-feedback">
+              <ul>
+                <li th:each="err: ${#fields.errors('frameType')}" th:text="${err}"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Features</label>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="cruiseControl" th:field="*{cruiseControl}" />
+              <label class="form-check-label" for="cruiseControl">Cruise Control</label>
+              <div th:if="${#fields.hasErrors('cruiseControl')}" class="invalid-feedback d-block">
+                <ul>
+                  <li th:each="err: ${#fields.errors('cruiseControl')}" th:text="${err}"></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="quickShifter" th:field="*{quickShifter}" />
+              <label class="form-check-label" for="quickShifter">Quick Shifter</label>
+              <div th:if="${#fields.hasErrors('quickShifter')}" class="invalid-feedback d-block">
+                <ul>
+                  <li th:each="err: ${#fields.errors('quickShifter')}" th:text="${err}"></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="manualTransmission" th:field="*{manualTransmission}" />
+              <label class="form-check-label" for="manualTransmission">Manual Transmission</label>
+              <div th:if="${#fields.hasErrors('manualTransmission')}" class="invalid-feedback d-block">
+                <ul>
+                  <li th:each="err: ${#fields.errors('manualTransmission')}" th:text="${err}"></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <input type="submit" class="btn btn-large btn-honda fw-bold text-uppercase" />
+
+        </form>
+
+
+
+        </div>
+      </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

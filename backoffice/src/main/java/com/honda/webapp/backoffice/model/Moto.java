@@ -1,7 +1,6 @@
 package com.honda.webapp.backoffice.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,9 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -48,10 +45,10 @@ public class Moto {
   @OneToMany(mappedBy = "moto", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Variant> variants;
 
-  @ManyToMany()
+  @ManyToOne
   @JsonIgnore
-  @JoinTable(name = "category_moto", joinColumns = @JoinColumn(name = "moto_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-  private List<Category> categories;
+  @JoinColumn(name = "category_id", nullable = false)
+  private Category category;
 
   public Integer getId() {
     return this.id;
@@ -101,12 +98,12 @@ public class Moto {
     this.variants = variants;
   }
 
-  public List<Category> getCategories() {
-    return this.categories;
+  public Category getCategory() {
+    return this.category;
   }
 
-  public void setCategories(List<Category> categories) {
-    this.categories = categories;
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
 }

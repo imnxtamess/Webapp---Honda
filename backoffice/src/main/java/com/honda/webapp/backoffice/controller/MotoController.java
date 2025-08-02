@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.honda.webapp.backoffice.model.Moto;
 import com.honda.webapp.backoffice.repository.CategoryRepository;
+import com.honda.webapp.backoffice.repository.EngineRepository;
 import com.honda.webapp.backoffice.service.MotoService;
 
 import jakarta.validation.Valid;
@@ -28,6 +29,9 @@ public class MotoController {
 
   @Autowired
   private CategoryRepository categoryRepository;
+
+  @Autowired
+  private EngineRepository engineRepository;
 
   @GetMapping
   public String index(Model model) {
@@ -59,6 +63,7 @@ public class MotoController {
 
     model.addAttribute("moto", new Moto());
     model.addAttribute("categories", categoryRepository.findAll());
+    model.addAttribute("engines", engineRepository.findAll());
 
     return "motos/create-or-edit";
   }
@@ -87,7 +92,7 @@ public class MotoController {
 
     model.addAttribute("moto", motoAttempt.get());
     model.addAttribute("categories", categoryRepository.findAll());
-
+    model.addAttribute("engines", engineRepository.findAll());
     return "motos/create-or-edit";
   }
 

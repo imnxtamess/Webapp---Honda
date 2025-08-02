@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.honda.webapp.backoffice.model.ColorVariant;
+import com.honda.webapp.backoffice.model.Moto;
+import com.honda.webapp.backoffice.model.Variant;
 import com.honda.webapp.backoffice.repository.ColorVariantRepository;
+import com.honda.webapp.backoffice.repository.VariantRepository;
 
 import jakarta.validation.Valid;
 
@@ -24,6 +27,8 @@ public class ColorVariantController {
 
   @Autowired
   private ColorVariantRepository colorVariantRepository;
+  @Autowired
+  private VariantRepository variantRepository;
 
   @GetMapping
   public String index(Model model) {
@@ -32,6 +37,22 @@ public class ColorVariantController {
 
     model.addAttribute("colorVariants", colorVariants);
 
+    return "color-variants/index";
+  }
+
+  @GetMapping("/variant/{variantId}")
+  public String indexByVariant(@PathVariable Integer variantId, Model model) {
+    List<ColorVariant> colorVariants = colorVariantRepository.findByVariantId(variantId);
+    model.addAttribute("colorVariants", colorVariants);
+    model.addAttribute("variantId", variantId);
+
+    Optional<Variant> variantAttempt = variantRepository.findById(variantId);
+
+    if (variantAttempt.isEmpty()) {
+      return "404";
+    }
+
+    model.addAttribute("variant", variantAttempt.get());
     return "color-variants/index";
   }
 
@@ -49,29 +70,67 @@ public class ColorVariantController {
     return "color-variants/show";
   }
 
-  @GetMapping("/create")
-  public String create(Model model) {
+  @GetMapping("/variant/{variantId}/create")
+  public String create(@PathVariable Integer variantId, Model model) {
 
-    model.addAttribute("colorVariant", new ColorVariant());
+    ColorVariant colorVariant = new ColorVariant();
+
+    Optional<Variant> variantAttempt = variantRepository.findById(variantId);
+
+    if (variantAttempt.isEmpty()) {
+      return "404";
+    }
+
+    Variant variant = variantAttempt.get();
+    Moto moto = variant.getMoto();
+
+    model.addAttribute("moto", moto);
+    model.addAttribute("variant", variant);
+
+    colorVariant.setVariant(variant);
+
+    model.addAttribute("colorVariant", colorVariant);
 
     return "color-variants/create-or-edit";
   }
 
-  @PostMapping("/create")
-  public String store(Model model, @Valid @ModelAttribute("colorVariant") ColorVariant colorVariantForm,
+  @PostMapping("/variant/{variantId}/create")
+  public String store(@PathVariable Integer variantId, Model model,
+      @Valid @ModelAttribute("colorVariant") ColorVariant colorVariantForm,
       BindingResult bindingResult) {
 
+    Optional<Variant> variantAttempt = variantRepository.findById(variantId);
+
+    if (variantAttempt.isEmpty()) {
+      return "404";
+    }
+
     if (bindingResult.hasErrors()) {
+      colorVariantForm.setVariant(variantAttempt.get());
       return "color-variants/create-or-edit";
     }
 
+    colorVariantForm.setVariant(variantAttempt.get());
+
     colorVariantRepository.save(colorVariantForm);
 
-    return "redirect:/color-variants";
+    return "redirect:/color-variants/variant/" + variantId;
   }
 
-  @GetMapping("/edit/{id}")
-  public String edit(@PathVariable Integer id, Model model) {
+  @GetMapping("/variant/{variantId}/edit/{id}")
+  public String edit(@PathVariable Integer variantId, @PathVariable Integer id, Model model) {
+
+    Optional<Variant> variantAttempt = variantRepository.findById(variantId);
+
+    if (variantAttempt.isEmpty()) {
+      return "404";
+    }
+
+    Variant variant = variantAttempt.get();
+    Moto moto = variant.getMoto();
+
+    model.addAttribute("moto", moto);
+    model.addAttribute("variant", variant);
 
     Optional<ColorVariant> colorVariantAttempt = colorVariantRepository.findById(id);
 
@@ -79,22 +138,36 @@ public class ColorVariantController {
       return "404";
     }
 
-    model.addAttribute("colorVariant", colorVariantAttempt.get());
+    ColorVariant colorVariant = colorVariantAttempt.get();
+
+    colorVariant.setVariant(variant);
+
+    model.addAttribute("colorVariant", colorVariant);
 
     return "color-variants/create-or-edit";
   }
 
-  @PostMapping("/edit/{id}")
-  public String update(Model model, @Valid @ModelAttribute("colorVariant") ColorVariant colorVariantForm,
+  @PostMapping("/variant/{variantId}/edit/{id}")
+  public String update(@PathVariable Integer variantId, Model model,
+      @Valid @ModelAttribute("colorVariant") ColorVariant colorVariantForm,
       BindingResult bindingResult) {
 
+    Optional<Variant> variantAttempt = variantRepository.findById(variantId);
+
+    if (variantAttempt.isEmpty()) {
+      return "404";
+    }
+
     if (bindingResult.hasErrors()) {
+      colorVariantForm.setVariant(variantAttempt.get());
       return "color-variants/create-or-edit";
     }
 
+    colorVariantForm.setVariant(variantAttempt.get());
+
     colorVariantRepository.save(colorVariantForm);
 
-    return "redirect:/color-variants";
+    return "redirect:/color-variants/variant/" + variantId;
   }
 
   @PostMapping("/delete/{id}")
@@ -106,9 +179,11 @@ public class ColorVariantController {
       return "404";
     }
 
+    Integer variantId = colorVariantAttempt.get().getVariant().getId();
+
     colorVariantRepository.delete(colorVariantAttempt.get());
 
-    return "redirect:/color-variants";
+    return "redirect:/color-variants/variant/" + variantId;
 
   }
 }

@@ -16,8 +16,16 @@ deleteBtns.forEach(deleteBtn => {
     const engineName = enginetype + ' ' + enginecc;
 
     const categoryId = deleteBtn.dataset.categoryid;
+    const categoryName = deleteBtn.dataset.categoryname;
 
-    const motorcycleId = deleteBtn.dataset.motorcycles;
+    const motorcycleId = deleteBtn.dataset.motoid;
+    const motorcycleName = deleteBtn.dataset.motoname;
+
+    const variantId = deleteBtn.dataset.variantid;
+    const variantName = deleteBtn.dataset.variantname;
+
+    const colorVariantId = deleteBtn.dataset.colorvariantid;
+    const colorVariantName = deleteBtn.dataset.colorvariantname;
 
     const deleteForm = document.querySelector(".deleteForm")
 
@@ -27,10 +35,16 @@ deleteBtns.forEach(deleteBtn => {
       confirmMsg.textContent = `Are you sure you want to delete ${engineName}?`;
     } else if (categoryId) {
       deleteForm.action = `/categories/delete/${categoryId}`;
-      confirmMsg.textContent = `Are you sure you want to delete this category?`;
+      confirmMsg.textContent = `Are you sure you want to delete the category: ${categoryName}?`;
     } else if (motorcycleId) {
       deleteForm.action = `/motos/delete/${motorcycleId}`;
-      confirmMsg.textContent = `Are you sure you want to delete this motorcycle?`;
+      confirmMsg.textContent = `Are you sure you want to delete ${motorcycleName}?`;
+    } else if (variantId) {
+      deleteForm.action = `/variants/delete/${variantId}`;
+      confirmMsg.textContent = `Are you sure you want to delete ${variantName}?`;
+    } else if (colorVariantId) {
+      deleteForm.action = `/color-variants/delete/${colorVariantId}`;
+      confirmMsg.textContent = `Are you sure you want to delete ${colorVariantName}?`;
     }
 
 

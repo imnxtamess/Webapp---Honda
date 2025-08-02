@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.honda.webapp.backoffice.model.Moto;
 import com.honda.webapp.backoffice.model.Variant;
 import com.honda.webapp.backoffice.repository.VariantRepository;
+import com.honda.webapp.backoffice.service.MotoService;
 
 import jakarta.validation.Valid;
 
@@ -25,6 +27,9 @@ public class VariantController {
   @Autowired
   private VariantRepository variantRepository;
 
+  @Autowired
+  private MotoService motoService;
+
   @GetMapping
   public String index(Model model) {
 
@@ -32,6 +37,22 @@ public class VariantController {
 
     model.addAttribute("variants", variants);
 
+    return "variants/index";
+  }
+
+  @GetMapping("/moto/{motoId}")
+  public String indexByMoto(@PathVariable Integer motoId, Model model) {
+    List<Variant> variants = variantRepository.findByMotoId(motoId);
+    model.addAttribute("variants", variants);
+    model.addAttribute("motoId", motoId);
+
+    Optional<Moto> motoAttempt = motoService.findById(motoId);
+
+    if (motoAttempt.isEmpty()) {
+      return "404";
+    }
+
+    model.addAttribute("moto", motoAttempt.get());
     return "variants/index";
   }
 
@@ -49,28 +70,67 @@ public class VariantController {
     return "variants/show";
   }
 
-  @GetMapping("/create")
-  public String create(Model model) {
+  @GetMapping("/moto/{motoId}/create")
+  public String create(@PathVariable Integer motoId, Model model) {
 
-    model.addAttribute("variant", new Variant());
+    Variant variant = new Variant();
+
+    Optional<Moto> motoAttempt = motoService.findById(motoId);
+
+    if (motoAttempt.isEmpty()) {
+      return "404";
+    }
+
+    Moto moto = motoAttempt.get();
+
+    model.addAttribute("moto", moto);
+
+    variant.setMoto(moto);
+
+    model.addAttribute("variant", variant);
+    System.out.println("Moto name: " + moto.getName());
 
     return "variants/create-or-edit";
   }
 
-  @PostMapping("/create")
-  public String store(Model model, @Valid @ModelAttribute("variant") Variant variantForm, BindingResult bindingResult) {
+  @PostMapping("/moto/{motoId}/create")
+  public String store(@PathVariable Integer motoId, Model model, @Valid @ModelAttribute("variant") Variant variantForm,
+      BindingResult bindingResult) {
+
+    Optional<Moto> motoAttempt = motoService.findById(motoId);
+
+    if (motoAttempt.isEmpty()) {
+      return "404";
+    }
+
+    Moto moto = motoAttempt.get();
 
     if (bindingResult.hasErrors()) {
+      variantForm.setMoto(motoAttempt.get());
+      model.addAttribute("variant", variantForm);
+      model.addAttribute("moto", moto);
       return "variants/create-or-edit";
     }
 
+    variantForm.setMoto(moto);
+
     variantRepository.save(variantForm);
 
-    return "redirect:/variants";
+    return "redirect:/variants/moto/" + motoId;
   }
 
-  @GetMapping("/edit/{id}")
-  public String edit(@PathVariable Integer id, Model model) {
+  @GetMapping("moto/{motoId}/edit/{id}")
+  public String edit(@PathVariable Integer motoId, @PathVariable Integer id, Model model) {
+
+    Optional<Moto> motoAttempt = motoService.findById(motoId);
+
+    if (motoAttempt.isEmpty()) {
+      return "404";
+    }
+
+    Moto moto = motoAttempt.get();
+
+    model.addAttribute("moto", moto);
 
     Optional<Variant> variantAttempt = variantRepository.findById(id);
 
@@ -78,22 +138,39 @@ public class VariantController {
       return "404";
     }
 
-    model.addAttribute("variant", variantAttempt.get());
+    Variant variant = variantAttempt.get();
+
+    variant.setMoto(moto);
+
+    model.addAttribute("variant", variant);
 
     return "variants/create-or-edit";
   }
 
-  @PostMapping("/edit/{id}")
-  public String update(Model model, @Valid @ModelAttribute("variant") Variant variantForm,
-      BindingResult bindingResult) {
+  @PostMapping("moto/{motoId}/edit/{id}")
+  public String update(@PathVariable Integer motoId, Model model,
+      @Valid @ModelAttribute("variant") Variant variantForm, BindingResult bindingResult) {
+
+    Optional<Moto> motoAttempt = motoService.findById(motoId);
+
+    if (motoAttempt.isEmpty()) {
+      return "404";
+    }
+
+    Moto moto = motoAttempt.get();
 
     if (bindingResult.hasErrors()) {
+      variantForm.setMoto(motoAttempt.get());
+      model.addAttribute("variant", variantForm);
+      model.addAttribute("moto", moto);
       return "variants/create-or-edit";
     }
 
+    variantForm.setMoto(moto);
+
     variantRepository.save(variantForm);
 
-    return "redirect:/variants";
+    return "redirect:/variants/moto/" + motoId;
   }
 
   @PostMapping("/delete/{id}")
@@ -105,9 +182,11 @@ public class VariantController {
       return "404";
     }
 
+    Integer motoId = variantAttempt.get().getMoto().getId();
+
     variantRepository.delete(variantAttempt.get());
 
-    return "redirect:/variants";
+    return "redirect:/variants/moto/" + motoId;
 
   }
 }

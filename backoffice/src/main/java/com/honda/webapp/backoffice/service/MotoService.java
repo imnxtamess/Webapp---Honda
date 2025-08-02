@@ -43,7 +43,7 @@ public class MotoService {
 
   public List<Moto> findByCategories_Id(Integer id) {
 
-    return motoRepository.findByCategories_Id(id);
+    return motoRepository.findByCategory_Id(id);
   }
 
 }
