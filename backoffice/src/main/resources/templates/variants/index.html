@@ -9,7 +9,7 @@
     <main>
       <h1 class="heading mt-5 text-center" th:text="'Variants of' + ' ' + ${moto.name}"></h1>
       <div class="container">
-      <a class="text-white fw-bold fs-3 d-block mt-3" th:href="@{/}"><i class="bi bi-arrow-left-short fs-1"></i></a>
+      <a class="text-white fw-bold fs-3 d-block mt-3" th:href="@{/motos}"><i class="bi bi-arrow-left-short fs-1"></i></a>
 
         <div class="bg-light rounded mt-3 p-3">
           <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
