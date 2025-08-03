@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <h1 class="heading mt-5 text-center" th:text="${moto.name}"></h1>
+      <div class="container bg-light rounded p-3 mt-4">
+        <div class="row p-5">
+          <div class="col-6">
+            <div class="moto-details d-flex flex-column gap-3">
+              <div>
+                <strong class="text-danger">Category:</strong>
+                <span th:text="${moto.category}"></span>
+              </div>
+              <div>
+                <strong class="text-danger">Engine:</strong>
+                <span
+                  th:text="${moto.engine.engineType} + ' ' + ${moto.engine.engineDisplacement} + 'cc'"
+                ></span>
+              </div>
+              <div>
+                <strong class="text-danger">Description:</strong>
+                <span th:text="${moto.description}"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <img
+              class="img-fluid"
+              th:src="${moto.imagePath}"
+              th:alt="'Picture of' +  ' ' + ${moto.name}"
+            />
+          </div>
+          <div class="col-12">
+            <div class="row bg-light rounded pt-0 pb-4 px-4 mt-4 text-dark">
+              <h2 class="text-center my-4 pb-3 fw-bold text-danger">Variants</h2>
+              <th:block
+                th:each="variant : ${moto.variants}"
+                th:object="${variant}"
+              >
+                <div class="col border border-dark p-3">
+                  <div class="d-flex justify-content-around">
+                    <div class="variant-details d-flex flex-column gap-3">
+                      <div>
+                        <strong class="text-danger">Name:</strong>
+                        <span th:text="${variant.name}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Price:</strong>
+                        <span th:text="${variant.price} + '&euro;'"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Weight:</strong>
+                        <span th:text="${variant.weight} + 'Kg'"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Tank capacity:</strong>
+                        <span th:text="${variant.tankCapacity} + 'L'"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Seat height:</strong>
+                        <span th:text="${variant.seatHeight} + 'mm'"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Front suspension:</strong>
+                        <span th:text="${variant.frontSuspension}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Rear suspension:</strong>
+                        <span th:text="${variant.rearSuspension}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Head lights:</strong>
+                        <span th:text="${variant.headLights}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Frame type:</strong>
+                        <span th:text="${variant.frameType}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Cruise control:</strong>
+                        <span th:text="${variant.cruiseControl}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Quickshifter:</strong>
+                        <span th:text="${variant.quickShifter}"></span>
+                      </div>
+                      <div>
+                        <strong class="text-danger">Manual Transmission</strong>
+                        <span th:text="${variant.manualTransmission}"></span>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-column">
+                          <h6>Colors:</h6>
+
+                      <th:block
+                        th:each="colorVariant : ${variant.colorVariants}"
+                        th:object="${colorVariant}"
+                      >
+                        <div>
+                          <strong class="text-danger fw-bold" th:text="${colorVariant.name}"></strong
+                          > <span
+                            class="hex-box"
+                            th:style="'background-color:' + ${colorVariant.hexCode}"
+
+                          ></span>
+                        </div>
+                        <div class="img-thumb">
+                          <img class="img-fluid" th:src="${colorVariant.imagePath}" alt="">
+                        </div>
+                      </th:block>
+                    </div>
+                  </div>
+                </div>
+              </th:block>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script th:src="@{/js/main.js}"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

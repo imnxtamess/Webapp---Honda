@@ -23,6 +23,21 @@ a {
   }
 }
 
+.hex-box {
+  vertical-align: bottom;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  border: 1px solid black;
+}
+
+.img-thumb {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  aspect-ratio: 1;
+}
+
 .deleteModal {
   background-color: rgb(31, 30, 30);
   text-align: center;

@@ -42,7 +42,7 @@ public class Moto {
   @JoinColumn(name = "engine_id", nullable = false)
   private Engine engine;
 
-  @OneToMany(mappedBy = "moto", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "moto")
   private List<Variant> variants;
 
   @ManyToOne

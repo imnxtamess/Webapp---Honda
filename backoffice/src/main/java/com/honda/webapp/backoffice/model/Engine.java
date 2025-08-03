@@ -46,7 +46,7 @@ public class Engine {
   @Column(nullable = false)
   private String compressionRatio;
 
-  @OneToMany(mappedBy = "engine", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "engine")
   private List<Moto> motos;
 
   public Integer getId() {

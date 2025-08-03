@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.honda.webapp.backoffice.model.Category;
 import com.honda.webapp.backoffice.repository.CategoryRepository;
@@ -81,7 +82,7 @@ public class CategoryController {
   }
 
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable Integer id) {
+  public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
 
     Optional<Category> categoryAttempt = categoryRepository.findById(id);
 
@@ -89,7 +90,15 @@ public class CategoryController {
       return "404";
     }
 
-    categoryRepository.delete(categoryAttempt.get());
+    Category category = categoryAttempt.get();
+
+    if (!category.getMotos().isEmpty()) {
+      redirectAttributes.addFlashAttribute("error",
+          "You can't delete a category if there are motorcycles associated with it.");
+      return "redirect:/categories";
+    }
+
+    categoryRepository.delete(category);
 
     return "redirect:/categories";
 

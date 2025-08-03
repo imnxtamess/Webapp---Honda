@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.honda.webapp.backoffice.model.Moto;
 import com.honda.webapp.backoffice.model.Variant;
@@ -174,7 +175,7 @@ public class VariantController {
   }
 
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable Integer id) {
+  public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
 
     Optional<Variant> variantAttempt = variantRepository.findById(id);
 
@@ -182,9 +183,17 @@ public class VariantController {
       return "404";
     }
 
-    Integer motoId = variantAttempt.get().getMoto().getId();
+    Variant variant = variantAttempt.get();
 
-    variantRepository.delete(variantAttempt.get());
+    Integer motoId = variant.getMoto().getId();
+
+    if (!variant.getColorVariants().isEmpty()) {
+      redirectAttributes.addFlashAttribute("error",
+          "You can't delete a variant that has a color-variant associated with it");
+      return "redirect:/variants/moto/" + motoId;
+    }
+
+    variantRepository.delete(variant);
 
     return "redirect:/variants/moto/" + motoId;
 

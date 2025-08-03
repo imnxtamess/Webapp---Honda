@@ -72,7 +72,7 @@ public class Variant {
   @JoinColumn(name = "moto_id", nullable = false)
   private Moto moto;
 
-  @OneToMany(mappedBy = "variant", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "variant")
   private List<ColorVariant> colorVariants;
 
   public Integer getId() {

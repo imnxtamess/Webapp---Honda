@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.honda.webapp.backoffice.model.Engine;
 import com.honda.webapp.backoffice.repository.EngineRepository;
@@ -96,7 +97,7 @@ public class EngineController {
   }
 
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable Integer id) {
+  public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
 
     Optional<Engine> engineAttempt = engineRepository.findById(id);
 
@@ -104,7 +105,15 @@ public class EngineController {
       return "404";
     }
 
-    engineRepository.delete(engineAttempt.get());
+    Engine engine = engineAttempt.get();
+
+    if (!engine.getMotos().isEmpty()) {
+
+      redirectAttributes.addFlashAttribute("error",
+          "You can't delete an engine if it has motorcycles associated with it.");
+      return "redirect:/engines";
+    }
+    engineRepository.delete(engine);
 
     return "redirect:/engines";
 
