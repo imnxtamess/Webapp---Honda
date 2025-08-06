@@ -1,0 +1,10 @@
+@import "bootstrap";
+@import "bootstrap-icons";
+
+:root {
+  --honda-primary: red;
+  --honda-secondary: red;
+  --honda-dark: red;
+  --honda-light: red;
+  --honda-lighter: red;
+}
