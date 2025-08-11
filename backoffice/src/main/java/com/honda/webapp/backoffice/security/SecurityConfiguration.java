@@ -1,5 +1,7 @@
 package com.honda.webapp.backoffice.security;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +14,9 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,10 +30,20 @@ public class SecurityConfiguration {
         .anyRequest().hasAuthority("ADMIN"))
         .formLogin(form -> form
             .loginPage("/login"))
-        .cors(cors -> cors.disable())
         .csrf(csrf -> csrf.disable());
 
     return http.build();
+  }
+
+  @Bean
+  CorsFilter corsFilter() {
+    CorsConfiguration config = new CorsConfiguration();
+    config.setAllowCredentials(true);
+    config.setAllowedOrigins(List.of("http://localhost:5173"));
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/api/v1/**", config);
+    return new CorsFilter(source);
   }
 
   @Bean

@@ -9,7 +9,7 @@ const GlobalProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    fetch(`${API_URL}/categories`)
+    fetch(`${API_URL}categories`)
       .then((res) => res.json())
       .then((data) => {
         setMotos({
