@@ -2,6 +2,8 @@ package com.honda.webapp.backoffice.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,6 +48,7 @@ public class Engine {
   private String compressionRatio;
 
   @OneToMany(mappedBy = "engine")
+  @JsonIgnore
   private List<Moto> motos;
 
   public Integer getId() {

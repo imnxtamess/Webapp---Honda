@@ -17,7 +17,7 @@ import com.honda.webapp.backoffice.service.MotoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/motos")
+@RequestMapping("/api/v1/motos")
 public class MotoRestController {
 
   @Autowired

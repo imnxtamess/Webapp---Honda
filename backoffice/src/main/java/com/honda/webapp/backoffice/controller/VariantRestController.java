@@ -16,7 +16,7 @@ import com.honda.webapp.backoffice.repository.VariantRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/variants")
+@RequestMapping("/api/v1/variants")
 public class VariantRestController {
 
   @Autowired

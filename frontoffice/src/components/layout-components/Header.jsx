@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export default function Header() {
   return (
     <>
@@ -20,27 +22,27 @@ export default function Header() {
             </button>
             <div className="collapse navbar-collapse" id="navbarID">
               <div className="navbar-nav align-items-lg-end h-100 gap-lg-3 ms-5">
-                <a
+                <NavLink
                   className="nav-link active bebas-neue-text p-0 pt-3"
                   aria-current="page"
-                  href="#"
+                  to={"/"}
                 >
                   Home
-                </a>
-                <a
+                </NavLink>
+                <NavLink
                   className="nav-link active bebas-neue-text p-0 pt-3"
                   aria-current="page"
-                  href="#"
+                  to={"/motorcycles"}
                 >
                   Motorcycles
-                </a>
-                <a
+                </NavLink>
+                <NavLink
                   className="nav-link active bebas-neue-text p-0 pt-3"
                   aria-current="page"
-                  href="#"
+                  to={"/our-story"}
                 >
                   Our story
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>

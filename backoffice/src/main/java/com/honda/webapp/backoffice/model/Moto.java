@@ -37,7 +37,6 @@ public class Moto {
   private String imagePath;
 
   @ManyToOne
-  @JsonIgnore
   @JoinColumn(name = "engine_id", nullable = false)
   private Engine engine;
 
