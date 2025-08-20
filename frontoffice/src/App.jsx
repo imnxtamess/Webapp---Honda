@@ -2,9 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import DefaultLayout from "./layouts/DefaultLayout";
 import Home from "./pages/Home";
-import Motorcycles from "./pages/Motorcycles";
 import OurStory from "./pages/OurStory";
 import { GlobalProvider } from "./context/GlobalContext";
+import Categories from "./pages/Categories";
+import Category from "./pages/Category";
+import Moto from "./pages/Moto";
 
 export default function App() {
   return (
@@ -13,7 +15,9 @@ export default function App() {
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/motorcycles" element={<Motorcycles />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/:slug" element={<Category />} />
+            <Route path="/variants/:slug" element={<Moto />} />
             <Route path="/our-story" element={<OurStory />} />
           </Route>
         </Routes>

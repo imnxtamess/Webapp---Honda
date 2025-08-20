@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <main className="homeBg">
+      <main className="homeBg mb-5">
         <div className="video-wrapper">
           <video autoPlay muted loop playsInline>
             <source src="/hero-video.mp4" type="video/mp4" />

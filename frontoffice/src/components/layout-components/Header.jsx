@@ -32,7 +32,7 @@ export default function Header() {
                 <NavLink
                   className="nav-link active bebas-neue-text p-0 pt-3"
                   aria-current="page"
-                  to={"/motorcycles"}
+                  to={"/categories"}
                 >
                   Motorcycles
                 </NavLink>

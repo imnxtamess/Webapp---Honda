@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="flying-bg-wrapper mt-5">
+        <div className="flying-bg-wrapper">
           <img src="/flying-bg.avif" alt="" className="flying-bg" />
           <div className="flying-text">
             <h2 className="fw-bold">
