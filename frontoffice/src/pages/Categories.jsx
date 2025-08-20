@@ -24,7 +24,7 @@ export default function Categories() {
       console.log(categories);
 
       return (
-        <div className="container mt-5">
+        <div className="container my-5">
           <div className="row row-cols-2 row-cols-lg-3 g-2">
             {categories.map((category, index) => (
               <div className="col" key={index}>
