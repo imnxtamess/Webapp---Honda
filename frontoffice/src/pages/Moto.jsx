@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-
+import Error404 from "../components/Error404";
 export default function Moto() {
   const { motos } = useGlobalContext();
   const { slug } = useParams();
@@ -289,7 +289,7 @@ export default function Moto() {
     case "error":
       return (
         <>
-          <h1>error</h1>
+          <Error404 />
         </>
       );
     default:

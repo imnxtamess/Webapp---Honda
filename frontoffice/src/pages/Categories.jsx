@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
+import Error404 from "../components/Error404";
 export default function Categories() {
   const { motos } = useGlobalContext();
 
@@ -51,7 +52,7 @@ export default function Categories() {
     case "error":
       return (
         <>
-          <h1>error</h1>
+          <Error404 />
         </>
       );
     default:
