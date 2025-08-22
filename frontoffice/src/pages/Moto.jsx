@@ -104,74 +104,179 @@ export default function Moto() {
                         />
                       </div>
                       <div className="specs d-flex flex-column align-items-start mt-3 px-5">
-                        <div>
-                          <strong>Engine: </strong>
-                          {moto.engine.engineDisplacement}cc{" "}
-                          {moto.engine.engineType}
-                        </div>
-                        <div>
-                          <strong>Max Power: </strong>
-                          {moto.engine.maxPower}
-                        </div>
-                        <div>
-                          <strong>Max Torque: </strong>
-                          {moto.engine.maxTorque}
-                        </div>
-                        <div>
-                          <strong>Fuel System: </strong>
-                          {moto.engine.fuelSystem}
-                        </div>
-                        <div>
-                          <strong>Compression Ratio: </strong>
-                          {moto.engine.compressionRatio}
-                        </div>
-                        <div>
-                          <strong>Cruise Control: </strong>
-                          {variant.cruiseControl ? "Yes" : "No"}
-                        </div>
-                        <div>
-                          <strong>Frame Type: </strong>
-                          {variant.frameType}
-                        </div>
-                        <div>
-                          <strong>Front Suspension: </strong>
-                          {variant.frontSuspension}
-                        </div>
-                        <div>
-                          <strong>Rear Suspension: </strong>
-                          {variant.rearSuspension}
-                        </div>
-                        <div>
-                          <strong>Headlights: </strong>
-                          {variant.headLights}
-                        </div>
-                        <div>
-                          <strong>Manual Transmission: </strong>
-                          {variant.manualTransmission ? "Yes" : "No"}
-                        </div>
-                        <div>
-                          <strong>Quick Shifter: </strong>
-                          {variant.quickShifter ? "Yes" : "No"}
-                        </div>
-                        <div>
-                          <strong>Seat Height: </strong>
-                          {variant.seatHeight} mm
-                        </div>
-                        <div>
-                          <strong>Tank Capacity: </strong>
-                          {variant.tankCapacity} L
-                        </div>
-                        <div>
-                          <strong>Weight: </strong>
-                          {variant.weight} kg
-                        </div>
+                        <div
+                          className="accordion"
+                          id={`specsAccordion-${index}`}
+                        >
+                          <div className="accordion-item engine">
+                            <h2
+                              className="accordion-header"
+                              id={`headingEngine-${index}`}
+                            >
+                              <button
+                                className="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#collapseEngine-${index}`}
+                                aria-expanded="true"
+                                aria-controls={`collapseEngine-${index}`}
+                              >
+                                Engine
+                              </button>
+                            </h2>
+                            <div
+                              id={`collapseEngine-${index}`}
+                              className="accordion-collapse collapse show"
+                              aria-labelledby={`headingEngine-${index}`}
+                              data-bs-parent={`#specsAccordion-${index}`}
+                            >
+                              <div className="accordion-body">
+                                <div>
+                                  <strong>Engine: </strong>
+                                  {moto.engine.engineDisplacement}cc{" "}
+                                  {moto.engine.engineType}
+                                </div>
+                                <div>
+                                  <strong>Max Power: </strong>
+                                  {moto.engine.maxPower}
+                                </div>
+                                <div>
+                                  <strong>Max Torque: </strong>
+                                  {moto.engine.maxTorque}
+                                </div>
+                                <div>
+                                  <strong>Fuel System: </strong>
+                                  {moto.engine.fuelSystem}
+                                </div>
+                                <div>
+                                  <strong>Compression Ratio: </strong>
+                                  {moto.engine.compressionRatio}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
-                        {/* cruiseControl : true frameType : "Aluminum"
-                        frontSuspension : "Inverted Telescopic" headLights
-                        :"LED" id : 1 manualTransmission : true name :
-                        "CBR1000RR Standard" price : 16000 quickShifter : true
-                        rearSuspension : "Mono-shock" seatHeight : 820
-                        tankCapacity : 17 weight : 197 */}
+                          <div className="accordion-item dimensions">
+                            <h2
+                              className="accordion-header"
+                              id={`headingDimensions-${index}`}
+                            >
+                              <button
+                                className="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#collapseDimensions-${index}`}
+                                aria-expanded="false"
+                                aria-controls={`collapseDimensions-${index}`}
+                              >
+                                Dimensions
+                              </button>
+                            </h2>
+                            <div
+                              id={`collapseDimensions-${index}`}
+                              className="accordion-collapse collapse"
+                              aria-labelledby={`headingDimensions-${index}`}
+                              data-bs-parent={`#specsAccordion-${index}`}
+                            >
+                              <div className="accordion-body">
+                                <div>
+                                  <strong>Seat Height: </strong>
+                                  {variant.seatHeight} mm
+                                </div>
+                                <div>
+                                  <strong>Tank Capacity: </strong>
+                                  {variant.tankCapacity} L
+                                </div>
+                                <div>
+                                  <strong>Weight: </strong>
+                                  {variant.weight} kg
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="accordion-item chassis">
+                            <h2
+                              className="accordion-header"
+                              id={`headingChassis-${index}`}
+                            >
+                              <button
+                                className="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#collapseChassis-${index}`}
+                                aria-expanded="false"
+                                aria-controls={`collapseChassis-${index}`}
+                              >
+                                Chassis
+                              </button>
+                            </h2>
+                            <div
+                              id={`collapseChassis-${index}`}
+                              className="accordion-collapse collapse"
+                              aria-labelledby={`headingChassis-${index}`}
+                              data-bs-parent={`#specsAccordion-${index}`}
+                            >
+                              <div className="accordion-body">
+                                <div>
+                                  <strong>Frame Type: </strong>
+                                  {variant.frameType}
+                                </div>
+                                <div>
+                                  <strong>Front Suspension: </strong>
+                                  {variant.frontSuspension}
+                                </div>
+                                <div>
+                                  <strong>Rear Suspension: </strong>
+                                  {variant.rearSuspension}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="accordion-item features">
+                            <h2
+                              className="accordion-header"
+                              id={`headingFeatures-${index}`}
+                            >
+                              <button
+                                className="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#collapseFeatures-${index}`}
+                                aria-expanded="false"
+                                aria-controls={`collapseFeatures-${index}`}
+                              >
+                                Features
+                              </button>
+                            </h2>
+                            <div
+                              id={`collapseFeatures-${index}`}
+                              className="accordion-collapse collapse"
+                              aria-labelledby={`headingFeatures-${index}`}
+                              data-bs-parent={`#specsAccordion-${index}`}
+                            >
+                              <div className="accordion-body">
+                                <div>
+                                  <strong>Headlights: </strong>
+                                  {variant.headLights}
+                                </div>
+                                <div>
+                                  <strong>Cruise Control: </strong>
+                                  {variant.cruiseControl ? "Yes" : "No"}
+                                </div>
+                                <div>
+                                  <strong>Quick Shifter: </strong>
+                                  {variant.quickShifter ? "Yes" : "No"}
+                                </div>
+                                <div>
+                                  <strong>Manual Transmission: </strong>
+                                  {variant.manualTransmission ? "Yes" : "No"}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
