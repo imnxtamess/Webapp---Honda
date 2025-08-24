@@ -34,7 +34,7 @@
           <div class="col-6">
             <img
               class="img-fluid"
-              th:src="${moto.imagePath}"
+              th:src="'/images/motorcycles/' + ${moto.imagePath}"
               th:alt="'Picture of' +  ' ' + ${moto.name}"
             />
           </div>
@@ -114,7 +114,7 @@
                         </th:block>
                       </div>
                     </div>
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column gap-3">
                           <h6>Colors:</h6>
 
                       <th:block
@@ -129,9 +129,9 @@
 
                           ></span>
                         </div>
-                        <div class="img-thumb">
+                        <!-- <div class="img-thumb">
                           <img class="img-fluid" th:src="${colorVariant.imagePath}" alt="">
-                        </div>
+                        </div> -->
                       </th:block>
                     </div>
                   </div>

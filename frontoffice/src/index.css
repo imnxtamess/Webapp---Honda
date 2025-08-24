@@ -116,6 +116,11 @@ footer {
   position: relative;
   .moto-hero {
     width: 100%;
+    @media (min-width: 992px) {
+      height: calc(100vh - 90px);
+
+      object-fit: cover;
+    }
   }
   .moto-hero-text {
     font-size: 2rem;
@@ -158,6 +163,10 @@ footer {
     box-shadow: 5px 5px 15px 0px #3d3d3d;
     background-color: white;
     padding: 2rem 0rem;
+    height: 700px;
+    @media (min-width: 992px) {
+      height: 850px;
+    }
     .spec-card-head {
       border-bottom: 2px solid black;
       img {
@@ -169,14 +178,32 @@ footer {
   }
 }
 
-/*404 style*/
+.accordion {
+  width: 100%;
+  button {
+    font-weight: bold;
+    box-shadow: none;
+    outline: none;
+  }
+}
+.accordion-button:not(.collapsed) {
+  background-color: #cc0010;
+  color: white;
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+/* 404 page */
+
 .honda-404 {
-  --honda-red: #e60012; /* Honda Racing Red */
+  --honda-red: #e60012;
   --honda-black: #111111;
   --honda-white: #ffffff;
 }
 
-/* Match your spec-card look */
 .honda-404 .spec-card {
   background: var(--honda-white);
   border-radius: 12px;
@@ -184,7 +211,6 @@ footer {
   box-shadow: 0 10px 30px rgba(17, 17, 17, 0.08);
 }
 
-/* Red/black/white accent bar */
 .honda-404 .brand-stripe {
   height: 6px;
   background: linear-gradient(
@@ -199,7 +225,6 @@ footer {
   border-radius: 999px;
 }
 
-/* Big 404 */
 .honda-404 .brand-404 {
   font-weight: 900;
   font-size: clamp(72px, 12vw, 160px);
@@ -214,7 +239,6 @@ footer {
   display: inline-block;
 }
 
-/* Buttons */
 .honda-404 .btn-honda-red {
   background: var(--honda-red);
   color: var(--honda-white);
@@ -226,7 +250,6 @@ footer {
   color: var(--honda-white);
 }
 
-/* Decorative chevrons */
 .honda-404 .honda-chevrons {
   position: absolute;
   inset: auto -40px -40px auto;
@@ -239,23 +262,6 @@ footer {
       40px;
   transform: skew(-10deg);
   pointer-events: none;
-}
-
-/* Dark mode tweak */
-@media (prefers-color-scheme: dark) {
-  .honda-404 .spec-card {
-    background: #0f0f10;
-    border-color: #1f1f22;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  }
-  .honda-404 .brand-404 {
-    color: transparent;
-    -webkit-text-stroke: 10px var(--honda-red);
-  }
-  .honda-404 .btn-outline-dark {
-    color: var(--honda-white);
-    border-color: #333;
-  }
 }
 
 @keyframes fade-in {

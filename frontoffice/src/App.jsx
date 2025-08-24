@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import DefaultLayout from "./layouts/DefaultLayout";
 import Home from "./pages/Home";
-import OurStory from "./pages/OurStory";
 import { GlobalProvider } from "./context/GlobalContext";
 import Categories from "./pages/Categories";
 import Category from "./pages/Category";
@@ -18,7 +17,6 @@ export default function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:slug" element={<Category />} />
             <Route path="/variants/:slug" element={<Moto />} />
-            <Route path="/our-story" element={<OurStory />} />
           </Route>
         </Routes>
       </BrowserRouter>

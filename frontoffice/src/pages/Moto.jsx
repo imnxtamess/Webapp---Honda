@@ -89,9 +89,9 @@ export default function Moto() {
               SPECIFICATIONS
             </h3>
             <div className="container">
-              <div className="row row-cols-1 row-cols-lg-2">
+              <div className="row row-cols-1 justify-content-center gap-3 gap-lg-0">
                 {moto.variants.map((variant, index) => (
-                  <div className="col" key={index}>
+                  <div className="col col-lg-6" key={index}>
                     <div className="spec-card">
                       <div className="px-5">
                         <h4 className="fw-bolder">{variant.name}</h4>
@@ -103,7 +103,7 @@ export default function Moto() {
                           alt={moto.name}
                         />
                       </div>
-                      <div className="specs d-flex flex-column align-items-start mt-3 px-5">
+                      <div className="specs d-flex flex-column justify-content-center align-items-center mt-3 px-5">
                         <div
                           className="accordion"
                           id={`specsAccordion-${index}`}

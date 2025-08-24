@@ -36,13 +36,6 @@ export default function Header() {
                 >
                   Motorcycles
                 </NavLink>
-                <NavLink
-                  className="nav-link active bebas-neue-text p-0 pt-3"
-                  aria-current="page"
-                  to={"/our-story"}
-                >
-                  Our story
-                </NavLink>
               </div>
             </div>
           </div>

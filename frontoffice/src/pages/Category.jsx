@@ -37,7 +37,7 @@ export default function Category() {
       console.log(motorcycles);
 
       return (
-        <div className="container mt-5">
+        <div className="container my-5">
           <div className="row row-cols-1 row-cols-lg-3 g-2">
             {motorcycles.map((moto, index) => (
               <div className="col" key={index}>
