@@ -27,25 +27,12 @@ public class SecurityConfiguration {
     return http.build();
   }
 
-  // @Bean
-  // CorsFilter corsFilter() {
-  // CorsConfiguration config = new CorsConfiguration();
-  // config.setAllowCredentials(true);
-  // config.setAllowedOrigins(List.of("http://localhost:5173"));
-
-  // UrlBasedCorsConfigurationSource source = new
-  // UrlBasedCorsConfigurationSource();
-  // source.registerCorsConfiguration("/api/v1/**", config);
-  // return new CorsFilter(source);
-  // }
-
   @Bean
   DaoAuthenticationProvider authenticationProvider() {
 
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
     authProvider.setUserDetailsService(userDetailService());
-    // authProvider.setUserDetailsService(inMemoryUserDetailService());
 
     authProvider.setPasswordEncoder(passwordEncoder());
 
