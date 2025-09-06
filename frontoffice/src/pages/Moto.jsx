@@ -5,7 +5,7 @@ import Error500 from "../components/Error500";
 import Error404 from "../components/Error404";
 export default function Moto() {
   const { motos } = useGlobalContext();
-  const { slug } = useParams();
+  const { categorySlug, motoSlug } = useParams();
   const [activeImg, setActiveImg] = useState({
     image: "/placeholder.avif",
     name: "placeholder",
@@ -21,15 +21,17 @@ export default function Moto() {
     case "success":
       const categories = motos.result;
 
-      const allMotos = categories.flatMap((categories) => categories.motos);
+      const category = categories.find(
+        (category) =>
+          category.name.toLowerCase().replaceAll(" ", "-") === categorySlug
+      );
+      if (!category) return <Error404 />;
 
-      const moto = allMotos.find((moto) => {
-        return moto.name.toLowerCase().replaceAll(" ", "-") === slug;
-      });
+      const moto = category.motos.find(
+        (moto) => moto.name.toLowerCase().replaceAll(" ", "-") === motoSlug
+      );
 
-      if (!moto) {
-        return <Error404 />;
-      }
+      if (!moto) return <Error404 />;
 
       if (activeImg.image == "/placeholder.avif") {
         setTimeout(() => {

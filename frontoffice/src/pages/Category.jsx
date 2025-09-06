@@ -5,7 +5,7 @@ import Error500 from "../components/Error500";
 import Error404 from "../components/Error404";
 export default function Category() {
   const { motos } = useGlobalContext();
-  const { slug } = useParams();
+  const { slug: categorySlug } = useParams();
 
   switch (motos.state) {
     case "loading":
@@ -19,7 +19,7 @@ export default function Category() {
       const categories = motos.result;
 
       const category = categories.find((category) => {
-        if (category.name.toLowerCase().replaceAll(" ", "-") === slug) {
+        if (category.name.toLowerCase().replaceAll(" ", "-") === categorySlug) {
           return true;
         }
       });
@@ -44,7 +44,7 @@ export default function Category() {
             {motorcycles.map((moto, index) => (
               <div className="col" key={index}>
                 <div className="category-card">
-                  <Link to={`/variants/${moto.slug}`}>
+                  <Link to={`/categories/${categorySlug}/${moto.slug}`}>
                     <p className="fw-bold  text-center">{moto.name} </p>
                     <img
                       src={`/motorcycles/${moto.variants[0].colorVariants[0].imagePath}`}

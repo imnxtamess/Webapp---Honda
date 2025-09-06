@@ -17,7 +17,10 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:slug" element={<Category />} />
-            <Route path="/variants/:slug" element={<Moto />} />
+            <Route
+              path="/categories/:categorySlug/:motoSlug"
+              element={<Moto />}
+            />
             <Route path="*" element={<Error404 />} />
           </Route>
         </Routes>
