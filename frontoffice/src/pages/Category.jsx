@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useParams } from "react-router-dom";
+import Error500 from "../components/Error500";
 import Error404 from "../components/Error404";
 export default function Category() {
   const { motos } = useGlobalContext();
-
   const { slug } = useParams();
 
   switch (motos.state) {
@@ -24,9 +24,11 @@ export default function Category() {
         }
       });
 
-      const motorcycles = category.motos;
+      if (!category) {
+        return <Error404 />;
+      }
 
-      console.log(motorcycles);
+      const motorcycles = category.motos;
 
       motorcycles.map((category) => {
         const slug = category.name.toLowerCase().replaceAll(" ", "-");
@@ -45,7 +47,7 @@ export default function Category() {
                   <Link to={`/variants/${moto.slug}`}>
                     <p className="fw-bold  text-center">{moto.name} </p>
                     <img
-                      src={`/motorcycles/${moto.imagePath}`}
+                      src={`/motorcycles/${moto.variants[0].colorVariants[0].imagePath}`}
                       alt={moto.name}
                     />
                   </Link>
@@ -59,7 +61,7 @@ export default function Category() {
     case "error":
       return (
         <>
-          <Error404 />
+          <Error500 />
         </>
       );
     default:

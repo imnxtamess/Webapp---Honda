@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.honda.webapp.backoffice.model.Moto;
+import com.honda.webapp.backoffice.model.Variant;
 import com.honda.webapp.backoffice.repository.CategoryRepository;
+import com.honda.webapp.backoffice.repository.ColorVariantRepository;
 import com.honda.webapp.backoffice.repository.EngineRepository;
+import com.honda.webapp.backoffice.repository.VariantRepository;
 import com.honda.webapp.backoffice.service.MotoService;
 
 import jakarta.validation.Valid;
@@ -33,6 +34,12 @@ public class MotoController {
 
   @Autowired
   private EngineRepository engineRepository;
+
+  @Autowired
+  private VariantRepository variantRepository;
+
+  @Autowired
+  private ColorVariantRepository colorVariantRepository;
 
   @GetMapping
   public String index(Model model) {
@@ -111,7 +118,7 @@ public class MotoController {
   }
 
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+  public String delete(@PathVariable Integer id) {
 
     Optional<Moto> motoAttempt = motoService.findById(id);
 
@@ -121,11 +128,11 @@ public class MotoController {
 
     Moto moto = motoAttempt.get();
 
-    if (!moto.getVariants().isEmpty()) {
-      redirectAttributes.addFlashAttribute("error",
-          "You can't delete a motorcycle which has variants associated with it");
-      return "redirect:/motos";
+    for (Variant variant : moto.getVariants()) {
+      colorVariantRepository.deleteAll(variant.getColorVariants());
     }
+
+    variantRepository.deleteAll(moto.getVariants());
 
     motoService.deleteById(id);
 

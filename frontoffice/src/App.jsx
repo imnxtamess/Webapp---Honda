@@ -6,6 +6,7 @@ import { GlobalProvider } from "./context/GlobalContext";
 import Categories from "./pages/Categories";
 import Category from "./pages/Category";
 import Moto from "./pages/Moto";
+import Error404 from "./components/Error404";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:slug" element={<Category />} />
             <Route path="/variants/:slug" element={<Moto />} />
+            <Route path="*" element={<Error404 />} />
           </Route>
         </Routes>
       </BrowserRouter>

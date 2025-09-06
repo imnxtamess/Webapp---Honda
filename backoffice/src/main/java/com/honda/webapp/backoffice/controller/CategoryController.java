@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.honda.webapp.backoffice.model.Category;
+import com.honda.webapp.backoffice.model.Moto;
+import com.honda.webapp.backoffice.model.Variant;
 import com.honda.webapp.backoffice.repository.CategoryRepository;
+import com.honda.webapp.backoffice.repository.ColorVariantRepository;
+import com.honda.webapp.backoffice.repository.MotoRepository;
+import com.honda.webapp.backoffice.repository.VariantRepository;
 
 import jakarta.validation.Valid;
 
@@ -24,6 +28,15 @@ public class CategoryController {
 
   @Autowired
   private CategoryRepository categoryRepository;
+
+  @Autowired
+  private MotoRepository motoRepository;
+
+  @Autowired
+  VariantRepository variantRepository;
+
+  @Autowired
+  ColorVariantRepository colorVariantRepository;
 
   @GetMapping
   public String index(Model model) {
@@ -82,7 +95,7 @@ public class CategoryController {
   }
 
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+  public String delete(@PathVariable Integer id) {
 
     Optional<Category> categoryAttempt = categoryRepository.findById(id);
 
@@ -92,10 +105,12 @@ public class CategoryController {
 
     Category category = categoryAttempt.get();
 
-    if (!category.getMotos().isEmpty()) {
-      redirectAttributes.addFlashAttribute("error",
-          "You can't delete a category if there are motorcycles associated with it.");
-      return "redirect:/categories";
+    for (Moto moto : category.getMotos()) {
+      for (Variant variant : moto.getVariants()) {
+        colorVariantRepository.deleteAll(variant.getColorVariants());
+      }
+      variantRepository.deleteAll(moto.getVariants());
+      motoRepository.delete(moto);
     }
 
     categoryRepository.delete(category);

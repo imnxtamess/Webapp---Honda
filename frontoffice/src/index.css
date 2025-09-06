@@ -78,7 +78,6 @@ footer {
       left: 50%;
       top: 40%;
       transform: translate(-50%, -50%);
-      animation: fade-in 1s forwards;
       img {
         height: 374px;
         width: 374px;
@@ -204,72 +203,30 @@ footer {
   --honda-white: #ffffff;
 }
 
-.honda-404 .spec-card {
-  background: var(--honda-white);
+.honda-404 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background: var(--honda-red);
   border-radius: 12px;
   border: 1px solid #e9ecef;
   box-shadow: 0 10px 30px rgba(17, 17, 17, 0.08);
 }
 
-.honda-404 .brand-stripe {
-  height: 6px;
-  background: linear-gradient(
-    90deg,
-    var(--honda-red) 0%,
-    var(--honda-red) 40%,
-    var(--honda-black) 40%,
-    var(--honda-black) 60%,
-    var(--honda-white) 60%,
-    var(--honda-white) 100%
-  );
-  border-radius: 999px;
-}
-
 .honda-404 .brand-404 {
   font-weight: 900;
-  font-size: clamp(72px, 12vw, 160px);
-  letter-spacing: 0.02em;
-  color: var(--honda-white);
-  -webkit-text-stroke: 10px var(--honda-red);
-  text-shadow: 0 2px 0 var(--honda-black), 0 0 24px rgba(230, 0, 18, 0.35);
-  paint-order: stroke fill;
-  margin-bottom: 0.25rem;
-}
-.honda-404 .brand-404 .digit {
-  display: inline-block;
-}
-
-.honda-404 .btn-honda-red {
-  background: var(--honda-red);
-  color: var(--honda-white);
-  border: none;
-}
-.honda-404 .btn-honda-red:hover,
-.honda-404 .btn-honda-red:focus {
-  background: #cc0010;
+  font-size: 8rem;
   color: var(--honda-white);
 }
 
-.honda-404 .honda-chevrons {
-  position: absolute;
-  inset: auto -40px -40px auto;
-  width: 180px;
-  height: 120px;
-  opacity: 0.08;
-  background: linear-gradient(135deg, var(--honda-black) 25%, transparent 25%) -20px
-      0/40px 40px,
-    linear-gradient(315deg, var(--honda-black) 25%, transparent 25%) 0 0/40px
-      40px;
-  transform: skew(-10deg);
-  pointer-events: none;
+.honda-404 .btn-honda-white {
+  background: var(--honda-white);
+  color: var(--honda-red);
+  font-weight: bold;
+  border: solid 1px black;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+.honda-404 .btn-honda-white:hover,
+.honda-404 .btn-honda-white:focus {
+  background: var(--honda-white);
+  color: var(--honda-black);
 }

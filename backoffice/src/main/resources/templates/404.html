@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block th:replace="~{fragments/resources :: style}"> </th:block>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="text404">
+          Error : 404 The page you were looking for does not exist
+        </div>
+        <div class="gobackBtn">
+          <a th:href="@{/}"><-- Go back to Homepage</a>
+        </div>
+      </div>
+    </main>
+    <script th:src="@{/js/main.js}"></script>
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

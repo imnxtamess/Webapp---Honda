@@ -1,12 +1,15 @@
-import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Error500 from "../components/Error500";
 import Error404 from "../components/Error404";
 export default function Moto() {
   const { motos } = useGlobalContext();
   const { slug } = useParams();
-  const [activeImg, setActiveImg] = useState("");
+  const [activeImg, setActiveImg] = useState({
+    image: "/placeholder.avif",
+    name: "placeholder",
+  });
   switch (motos.state) {
     case "loading":
       return (
@@ -24,14 +27,25 @@ export default function Moto() {
         return moto.name.toLowerCase().replaceAll(" ", "-") === slug;
       });
 
-      console.log(moto);
+      if (!moto) {
+        return <Error404 />;
+      }
+
+      if (activeImg.image == "/placeholder.avif") {
+        setTimeout(() => {
+          setActiveImg({
+            image: moto.variants[0].colorVariants[0].imagePath,
+            name: moto.variants[0].colorVariants[0].name,
+          });
+        }, 1);
+      }
 
       return (
         <>
           <div className="moto-hero-container">
             <img
               className="moto-hero"
-              src={`/motorcycles/hero-${moto.imagePath}`}
+              src={`/motorcycles/${moto.imagePath}`}
               alt=""
             />
             <h2 className="moto-hero-text">{moto.name}</h2>
@@ -40,47 +54,24 @@ export default function Moto() {
           <div className="container mt-5">
             <h3 className="fw-bold fs-2 text-center">VARIANTS</h3>
             <div className="mx-3 variant-selector">
-              <img
-                src={`/motorcycles/${moto.imagePath}`}
-                alt={moto.name}
-                className={activeImg.includes("variant") ? "d-none" : "d-block"}
-              />
-              <img
-                className={activeImg.includes("variant") ? "d-block" : "d-none"}
-                src={`/motorcycles/variant-${moto.imagePath}`}
-                alt={moto.name}
-              />
-              <span className="text-center fw-bold fs-4">
-                {activeImg.includes("variant")
-                  ? moto.variants[0].colorVariants[1].name
-                  : moto.variants[0].colorVariants[0].name}
-                {}
-              </span>
+              <img src={`/motorcycles/${activeImg.image}`} alt={moto.name} />
+
+              <span className="text-center fw-bold fs-4">{activeImg.name}</span>
+
               <div className="thumb-container gap-3">
-                <img
-                  onClick={() => {
-                    setActiveImg(`/motorcycles/${moto.imagePath}`);
-                  }}
-                  className={
-                    activeImg.includes("variant")
-                      ? "border-light"
-                      : "border-dark"
-                  }
-                  src={`/motorcycles/${moto.imagePath}`}
-                  alt=""
-                />
-                <img
-                  onClick={() => {
-                    setActiveImg(`/motorcycles/variant-${moto.imagePath}`);
-                  }}
-                  className={
-                    activeImg.includes("variant")
-                      ? "border-dark"
-                      : "border-light"
-                  }
-                  src={`/motorcycles/variant-${moto.imagePath}`}
-                  alt=""
-                />
+                {moto.variants[0].colorVariants.map((color, index) => (
+                  <img
+                    key={index}
+                    onClick={() => {
+                      setActiveImg({
+                        image: color.imagePath,
+                        name: color.name,
+                      });
+                    }}
+                    src={`/motorcycles/${color.imagePath}`}
+                    alt={`/motorcycles/${color.name}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -99,7 +90,7 @@ export default function Moto() {
                       </div>
                       <div className="spec-card-head">
                         <img
-                          src={`/motorcycles/${moto.imagePath}`}
+                          src={`/motorcycles/${activeImg.image}`}
                           alt={moto.name}
                         />
                       </div>
@@ -289,7 +280,7 @@ export default function Moto() {
     case "error":
       return (
         <>
-          <Error404 />
+          <Error500 />
         </>
       );
     default:

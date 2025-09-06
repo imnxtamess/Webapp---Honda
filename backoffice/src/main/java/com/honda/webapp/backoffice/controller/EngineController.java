@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.honda.webapp.backoffice.model.Engine;
+import com.honda.webapp.backoffice.model.Moto;
+import com.honda.webapp.backoffice.model.Variant;
+import com.honda.webapp.backoffice.repository.ColorVariantRepository;
 import com.honda.webapp.backoffice.repository.EngineRepository;
+import com.honda.webapp.backoffice.repository.MotoRepository;
+import com.honda.webapp.backoffice.repository.VariantRepository;
 
 import jakarta.validation.Valid;
 
@@ -25,6 +28,15 @@ public class EngineController {
 
   @Autowired
   private EngineRepository engineRepository;
+
+  @Autowired
+  private MotoRepository motoRepository;
+
+  @Autowired
+  private VariantRepository variantRepository;
+
+  @Autowired
+  private ColorVariantRepository colorVariantRepository;
 
   @GetMapping
   public String index(Model model) {
@@ -97,7 +109,7 @@ public class EngineController {
   }
 
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+  public String delete(@PathVariable Integer id) {
 
     Optional<Engine> engineAttempt = engineRepository.findById(id);
 
@@ -107,12 +119,14 @@ public class EngineController {
 
     Engine engine = engineAttempt.get();
 
-    if (!engine.getMotos().isEmpty()) {
-
-      redirectAttributes.addFlashAttribute("error",
-          "You can't delete an engine if it has motorcycles associated with it.");
-      return "redirect:/engines";
+    for (Moto moto : engine.getMotos()) {
+      for (Variant variant : moto.getVariants()) {
+        colorVariantRepository.deleteAll(variant.getColorVariants());
+      }
+      variantRepository.deleteAll(moto.getVariants());
+      motoRepository.delete(moto);
     }
+
     engineRepository.delete(engine);
 
     return "redirect:/engines";
