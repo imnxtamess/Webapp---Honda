@@ -25,7 +25,6 @@ export default function Error404() {
           </Link>
         </div>
       </div>
-      );
     </>
   );
 }

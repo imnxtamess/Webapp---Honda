@@ -33,7 +33,6 @@ export default function Error500() {
           </div>
         </div>
       </div>
-      );
     </>
   );
 }
